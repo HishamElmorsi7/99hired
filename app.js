@@ -1,3 +1,4 @@
+const path = require('path')
 const express = require('express');
 const jobRouter = require('./routes/jobRoutes')
 const userRouter = require('./routes/userRoutes')
@@ -8,6 +9,9 @@ const app = express();
 
 // MIDDLEWARES
 app.use(express.json())
+
+app.set('view engine', 'pug')
+app.set('views', path.join(__dirname, 'views'))
 
 // ROUTES
 app.use('/api/v1/jobs', jobRouter)
