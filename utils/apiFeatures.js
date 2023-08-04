@@ -19,6 +19,12 @@ class ApiFeatures {
         queryObj = JSON.parse(queryStr)
 
 
+        for(const key in queryObj){
+            if(queryObj[key] === ''){
+                delete queryObj[key]
+            }
+        }
+
         // find returns an array of jobs and converts them to js objects
         this.query =  this.query.find(queryObj)
 

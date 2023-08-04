@@ -2,7 +2,10 @@ const Job = require('../models/jobModel')
 const ApiFeatures = require('../utils/apiFeatures')
 const AppError = require('../utils/appError')
 const catchAsync = require('../utils/catchAsync')
-
+const generateSlug = require('../utils/generateSlug')
+const pug = require('pug')
+const fs = require('fs');
+const path = require('path');
 // Note: When sending data in body we set the heading to json because the server can only parse the data
 //  to body => req.body using Json.parse middleware only if the heading is set to json.
 
@@ -16,14 +19,78 @@ const catchAsync = require('../utils/catchAsync')
 // implement after the function is resolved or rejected by stopped
 
 
+// exports.getAllJobs = catchAsync(
+//     async (req, res) => {
+    
+//         let query = Job.find({})
+//         const queryString = req.query
+
+//         console.log(queryString)
+
+//         // x + 1 will result in something went wrong as it is non operational
+//         // x + 1
+//         const apiFeatures = new ApiFeatures(query, queryString)
+//         apiFeatures
+//             .filter()
+//             .sort()
+//             .limitFields()
+//             .paginate()
+
+//         query = apiFeatures.query
+
+//         // pre find hook middleware will be executed beore this find query executed 
+//         // you will find that in GetAll
+//         const jobs = await query
+
+
+//         console.log('\n\n\n\n')
+//         console.log(jobs)
+//         console.log('\n\n\n\n')
+
+
+//         const templatePath = path.join(__dirname, '../views/jobsContent.pug');
+//         const pugTemplate = fs.readFileSync(templatePath, 'utf8');
+        
+//         const templateData = {
+//           name: 'John',
+//         };
+        
+//         const options = {
+//           filename: templatePath, // Provide the absolute path of the template file
+//         };
+        
+//         // Compile the Pug template into a function
+//         const compiledFunction = pug.compile(pugTemplate, jobs, { filename: templatePath });
+
+//         // Pass the data to the compiled function to get the rendered HTML
+//         const renderedHtml = compiledFunction({ jobs });        
+
+
+//         console.log(renderedHtml)
+//         res.status(200).send(renderedHtml)
+//         // RESPONSE
+//         // res.status(200).json({
+//         //     status: 'success',
+//         //     results: jobs.length,
+//         //     data: {
+//         //         jobs
+//         //     }
+//         // })
+        
+//     }
+// )
+
+
+
+
 exports.getAllJobs = catchAsync(
     async (req, res) => {
     
         let query = Job.find({})
         const queryString = req.query
 
-        // x + 1 will result in something went wrong as it is non operational
-        // x + 1
+        console.log(queryString)
+
         const apiFeatures = new ApiFeatures(query, queryString)
         apiFeatures
             .filter()
@@ -36,19 +103,17 @@ exports.getAllJobs = catchAsync(
         // pre find hook middleware will be executed beore this find query executed 
         // you will find that in GetAll
         const jobs = await query
+        console.log(jobs)
 
-        // RESPONSE
-        res.status(200).json({
-            status: 'success',
-            results: jobs.length,
-            data: {
-                jobs
-            }
+        return res.status(200).render('jobs', {
+            jobs
         })
+
+
+
         
     }
 )
-
 
 exports.getJob = catchAsync(
     async (req, res, next) => {
@@ -73,19 +138,23 @@ exports.getJob = catchAsync(
                 job
             }
         })
-        console.log('hi after sending status')
-
     }
 )
 
-exports.createJob = catchAsync(
-    async (req, res) => {
 
-        const newJob = await Job.create(req.body)
+exports.createJob = catchAsync(
+    async (req, res, next) => {
+
+        const postedJob = req.body
+        const slug = await generateSlug(postedJob)
+        postedJob.slug = slug
+
+        const createdJob = await Job.create(postedJob)
+
         res.status(201).json({
             status: 'success',
             data: {
-                job: newJob
+                job: createdJob
             }
         })
     }
