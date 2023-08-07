@@ -25,7 +25,7 @@ process.on('uncaughtException', (error) => {
 
 
 
-DB = process.env.DATABASE_LOCAL
+DB = process.env.DATABASE_ATLAS
 
 mongoose.connect(DB, {
     useNewUrlParser: true,
