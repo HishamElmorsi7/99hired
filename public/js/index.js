@@ -88,7 +88,7 @@ if (jobForm) {
     });
 
 
-    fetch('http://127.0.0.1:8000/api/v1/jobs/validateJob', {
+    fetch('/api/v1/jobs/validateJob', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
