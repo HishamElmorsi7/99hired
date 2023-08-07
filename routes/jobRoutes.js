@@ -16,8 +16,11 @@ router
 router
     .route('/:id')
     .get(jobController.getJob)
-    .patch(jobController.updateJob)
-    .delete(jobController.deleteJob)
+    // .patch(jobController.updateJob)
+    // .delete(jobController.deleteJob)
+
+
+router.post('/validateJob', jobController.validateJob)
 
 
 module.exports = router

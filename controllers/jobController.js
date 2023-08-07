@@ -1,95 +1,16 @@
 const Job = require('../models/jobModel')
+const Transaction = require('../models/transactionModel')
 const ApiFeatures = require('../utils/apiFeatures')
 const AppError = require('../utils/appError')
 const catchAsync = require('../utils/catchAsync')
 const generateSlug = require('../utils/generateSlug')
-const pug = require('pug')
-const fs = require('fs');
-const path = require('path');
-// Note: When sending data in body we set the heading to json because the server can only parse the data
-//  to body => req.body using Json.parse middleware only if the heading is set to json.
-
-// When sending data to the browser or for example postman we use headin json so as the browser or postman can 
-// know that it is json and display data based on that. And the most important case is when the client gets the
-// data he must know the type of data so that he uses the matching parsing methods, if he didn't use an appropiate method
-// he will get an error.
-
-// async await: here what await does is not to implement the next lines until the current operation is resolved or rejected
-// And here we use async with the function so as that the await doesn't stop the running code and only the lines we need to
-// implement after the function is resolved or rejected by stopped
-
-
-// exports.getAllJobs = catchAsync(
-//     async (req, res) => {
-    
-//         let query = Job.find({})
-//         const queryString = req.query
-
-//         console.log(queryString)
-
-//         // x + 1 will result in something went wrong as it is non operational
-//         // x + 1
-//         const apiFeatures = new ApiFeatures(query, queryString)
-//         apiFeatures
-//             .filter()
-//             .sort()
-//             .limitFields()
-//             .paginate()
-
-//         query = apiFeatures.query
-
-//         // pre find hook middleware will be executed beore this find query executed 
-//         // you will find that in GetAll
-//         const jobs = await query
-
-
-//         console.log('\n\n\n\n')
-//         console.log(jobs)
-//         console.log('\n\n\n\n')
-
-
-//         const templatePath = path.join(__dirname, '../views/jobsContent.pug');
-//         const pugTemplate = fs.readFileSync(templatePath, 'utf8');
-        
-//         const templateData = {
-//           name: 'John',
-//         };
-        
-//         const options = {
-//           filename: templatePath, // Provide the absolute path of the template file
-//         };
-        
-//         // Compile the Pug template into a function
-//         const compiledFunction = pug.compile(pugTemplate, jobs, { filename: templatePath });
-
-//         // Pass the data to the compiled function to get the rendered HTML
-//         const renderedHtml = compiledFunction({ jobs });        
-
-
-//         console.log(renderedHtml)
-//         res.status(200).send(renderedHtml)
-//         // RESPONSE
-//         // res.status(200).json({
-//         //     status: 'success',
-//         //     results: jobs.length,
-//         //     data: {
-//         //         jobs
-//         //     }
-//         // })
-        
-//     }
-// )
-
-
 
 
 exports.getAllJobs = catchAsync(
-    async (req, res) => {
+    async (req, res, next) => {
     
         let query = Job.find({})
         const queryString = req.query
-
-        console.log(queryString)
 
         const apiFeatures = new ApiFeatures(query, queryString)
         apiFeatures
@@ -103,7 +24,6 @@ exports.getAllJobs = catchAsync(
         // pre find hook middleware will be executed beore this find query executed 
         // you will find that in GetAll
         const jobs = await query
-        console.log(jobs)
 
         return res.status(200).render('jobs', {
             jobs
@@ -141,24 +61,59 @@ exports.getJob = catchAsync(
     }
 )
 
-
-exports.createJob = catchAsync(
+exports.validateJob = catchAsync(
     async (req, res, next) => {
 
-        const postedJob = req.body
-        const slug = await generateSlug(postedJob)
-        postedJob.slug = slug
-
-        const createdJob = await Job.create(postedJob)
+        const postedJobData = req.body
+        const slug = await generateSlug(postedJobData)
+        postedJobData.slug = slug
+        const job = new Job(postedJobData)
+        await job.validate();
 
         res.status(201).json({
             status: 'success',
             data: {
-                job: createdJob
+                postedJobData
             }
         })
     }
 )
+
+
+exports.createJob = catchAsync(
+    async (req, res, next) => {
+
+
+        const validatedJob = req.body.validatedJobData
+        const transactionId = req.body.transactionId
+        const transaction = await Transaction.findOne({transactionId})
+        
+        if(transaction && validatedJob) {
+            const slug = await generateSlug(validatedJob)
+            validatedJob.slug = slug
+    
+            const createdJob = await Job.create(validatedJob)
+    
+            // Delete the transaction Id
+            await Transaction.deleteOne({transactionId})
+
+            res.status(201).json({
+                status: 'success',
+                data: {
+                    job: createdJob
+                }
+            })
+
+        } else {
+            res.status(404).json({
+                status: 'error',
+                message: 'Either Job or Transaction not found'
+            })
+        }
+    }
+)
+
+
 
 exports.updateJob = catchAsync(
     async (req, res, next) => {
@@ -221,7 +176,7 @@ exports.lastFiveJobsAlias = (req, res, next) => {
 }
 
 exports.getStats = catchAsync(
-    async (req, res) => {
+    async (req, res, next) => {
             // Expressions only provides additional features to queries
             const stats =   await Job.aggregate(
             [

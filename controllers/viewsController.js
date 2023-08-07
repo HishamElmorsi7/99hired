@@ -27,6 +27,7 @@ exports.getJob = catchAsync(async (req, res, next)=> {
 
 exports.getPricing = (req, res)=> {
     res.status(200).render('pricing')
+    
 }
 
 exports.getJobForm = (req, res)=> {

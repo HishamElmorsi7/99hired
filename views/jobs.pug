@@ -54,11 +54,12 @@ html(lang="en")
                                     br(class="lg:hidden")
                                     | IN MIDDLE EAST
                                 p(class="mb-10 font-medium text-xl text-center text-white") Join the Tech Revolution: Explore the Best Backend Jobs in the Middle East
-                                button(class="group mb-9 relative flex items-center justify-center font-heading px-24 py-5 mx-auto w-full lg:w-auto uppercase text-white text-xs font-semibold tracking-px bg-gray-900 overflow-hidden rounded-md")
-                                    div(class="absolute transform -translate-x-full group-hover:-translate-x-0 h-full w-full transition ease-in-out duration-500 bg-gradient-cyan")
-                                    a(class="relative z-10", href=`/jobform`) POST JOB NOW
-                                    svg(class="relative z-10", width="19", height="18", viewbox="0 0 19 18", fill="none", xmlns="http://www.w3.org/2000/svg")
-                                        path(fill-rule="evenodd", clip-rule="evenodd", d="M9.49999 16.2C13.4764 16.2 16.7 12.9764 16.7 8.99999C16.7 5.02354 13.4764 1.79999 9.49999 1.79999C5.52354 1.79999 2.29999 5.02354 2.29999 8.99999C2.29999 12.9764 5.52354 16.2 9.49999 16.2ZM12.8364 8.36359L10.1364 5.66359C9.78491 5.31212 9.21506 5.31212 8.86359 5.66359C8.51212 6.01506 8.51212 6.58491 8.86359 6.93638L10.0272 8.09999L6.79999 8.09999C6.30293 8.09999 5.89999 8.50293 5.89999 8.99999C5.89999 9.49704 6.30293 9.89999 6.79999 9.89999H10.0272L8.86359 11.0636C8.51212 11.4151 8.51212 11.9849 8.86359 12.3364C9.21506 12.6879 9.78491 12.6879 10.1364 12.3364L12.8364 9.63638C13.1879 9.28491 13.1879 8.71506 12.8364 8.36359Z", fill="white")
+                                a(href="/jobform") 
+                                    button(class="group mb-9 relative flex items-center justify-center font-heading px-24 py-5 mx-auto w-full lg:w-auto uppercase text-white text-xs font-semibold tracking-px bg-gray-900 overflow-hidden rounded-md")
+                                        div(class="absolute transform -translate-x-full group-hover:-translate-x-0 h-full w-full transition ease-in-out duration-500 bg-gradient-cyan")
+                                        p(class="relative z-10") POST JOB NOW
+                                        svg(class="relative z-10", width="19", height="18", viewbox="0 0 19 18", fill="none", xmlns="http://www.w3.org/2000/svg")
+                                            path(fill-rule="evenodd", clip-rule="evenodd", d="M9.49999 16.2C13.4764 16.2 16.7 12.9764 16.7 8.99999C16.7 5.02354 13.4764 1.79999 9.49999 1.79999C5.52354 1.79999 2.29999 5.02354 2.29999 8.99999C2.29999 12.9764 5.52354 16.2 9.49999 16.2ZM12.8364 8.36359L10.1364 5.66359C9.78491 5.31212 9.21506 5.31212 8.86359 5.66359C8.51212 6.01506 8.51212 6.58491 8.86359 6.93638L10.0272 8.09999L6.79999 8.09999C6.30293 8.09999 5.89999 8.50293 5.89999 8.99999C5.89999 9.49704 6.30293 9.89999 6.79999 9.89999H10.0272L8.86359 11.0636C8.51212 11.4151 8.51212 11.9849 8.86359 12.3364C9.21506 12.6879 9.78491 12.6879 10.1364 12.3364L12.8364 9.63638C13.1879 9.28491 13.1879 8.71506 12.8364 8.36359Z", fill="white")
             div(class="container mx-auto")       
             |       
             |       
@@ -85,6 +86,7 @@ html(lang="en")
                                     div(class="group font-heading font-medium text-gray-900 hover:text-gray-800 text-base overflow-hidden text-center")
                                         select(style="cursor: pointer", id="tech-select2", class="w-full px-6 py-4 placeholder-gray-500 text-base text-gray-500 bg-white outline-none rounded-lg text-center", name='level')
                                             option(value="", selected="selected") All Levels
+                                            option(value="intern") Intern
                                             option(value="junior") Junior
                                             option(value="mid-level") Mid-level
                                             option(value="senior") Senior
@@ -102,28 +104,28 @@ html(lang="en")
                                     div(class="group font-heading font-medium text-gray-900 hover:text-gray-800 text-base overflow-hidden text-center")
                                         select(style="cursor: pointer", id="tech-select4", class="w-full px-6 py-4 placeholder-gray-500 text-base text-gray-500 bg-white outline-none rounded-lg text-center", name ='location')
                                             option(value="", selected="selected") All Countries
-                                            option(value="algeria") Algeria
-                                            option(value="bahrain") Bahrain
-                                            option(value="comoros") Comoros
-                                            option(value="dijibouti") Djibouti
-                                            option(value="egypt") Egypt
-                                            option(value="iraq") Iraq
-                                            option(value="jordan") Jordan
-                                            option(value="kuwait") Kuwait
-                                            option(value="lebanon") Lebanon
-                                            option(value="libya") Libya
-                                            option(value="mauritania") Mauritania
-                                            option(value="morocco") Morocco
-                                            option(value="oman") Oman
-                                            option(value="palestine") Palestine
-                                            option(value="qatar") Qatar
-                                            option(value="saudi arabia") Saudi Arabia
-                                            option(value="somalia") Somalia
-                                            option(value="sudan") Sudan
-                                            option(value="syria") Syria
-                                            option(value="tunisia") Tunisia
-                                            option(value="united arab emirates") United Arab Emirates
-                                            option(value="yamen") Yemen
+                                            option(value="🇩🇿 Algeria") Algeria
+                                            option(value="🇧🇭 Bahrain") Bahrain
+                                            option(value="🇰🇲 Comoros") Comoros
+                                            option(value="🇩🇯 Djibouti") Djibouti
+                                            option(value="🇪🇬 Egypt") Egypt
+                                            option(value="🇮🇶 Iraq") Iraq
+                                            option(value="🇯🇴 Jordan") Jordan
+                                            option(value="🇰🇼 Kuwait") Kuwait
+                                            option(value="🇱🇧 Lebanon") Lebanon
+                                            option(value="🇱🇾 Libya") Libya
+                                            option(value="🇲🇷 Mauritania") Mauritania
+                                            option(value="🇲🇦 Morocco") Morocco
+                                            option(value="🇴🇲 Oman") Oman
+                                            option(value="🇵🇸 Palestine") Palestine
+                                            option(value="🇶🇦 Qatar") Qatar
+                                            option(value="🇸🇦 Saudi Arabia") Saudi Arabia
+                                            option(value="🇸🇴 Somalia") Somalia
+                                            option(value="🇸🇩 Sudan") Sudan
+                                            option(value="🇸🇾 Syria") Syria
+                                            option(value="🇹🇳 Tunisia") Tunisia
+                                            option(value="🇦🇪 United Arab Emirates") United Arab Emirates
+                                            option(value="🇾🇪 Yemen") Yemen
                                             | 
                                         div(class="w-full transform -translate-x-0 group-hover:translate-x-full h-0.5 bg-gradient-cyan transition ease-in-out duration-500")
                                 div(class="w-full sm:w-1/5 lg:w-1/5 py-2 lg:flex lg:justify-end sm:px-2")
@@ -144,19 +146,20 @@ html(lang="en")
                     |             
                     |           
             section(class="relative pt-24 pb-28 bg-black overflow-hidden")
-                div(class="relative z-10 container mx-auto px-4")
-                    h2(class="mb-12 max-w-lg mx-auto font-heading font-bold text-center text-6xl sm:text-7xl text-white") Join our newsletter? Get Upated with jobs
-                    div(class="mb-9 md:max-w-lg mx-auto")
-                        div(class="p-1 flex flex-col md:flex-row bg-white focus-within:ring-4 focus-within:ring-indigo-500 overflow-hidden rounded-md")
-                            input(class="block flex-1 px-5 py-4 md:py-0 text-base text-gray-500 bg-transparent outline-none placeholder-gray-500 rounded-tl-xl rounded-bl-xl", type="text", placeholder="Enter email to get started")
-                            button(class="group relative font-heading font-semibold w-full md:w-auto py-5 px-8 text-xs text-white bg-gray-900 uppercase overflow-hidden rounded-md tracking-px")
-                                div(class="absolute top-0 left-0 transform -translate-y-full group-hover:-translate-y-0 h-full w-full transition ease-in-out duration-500 bg-gradient-cyan")
-                                p(class="relative z-10") Connect now
-                    p(class="text-gray-500 text-sm text-center")
-                        span Or, learn more
-                        |             
-                        a(class="text-white hover:text-gray-200", href="#") about Gradia
-                img(class="absolute bottom-0 left-1/2 transform -translate-x-1/2", src="/gradia-assets/elements/cta/radial3.png", alt="")
+                form(id="newsletter") 
+                    div(class="relative z-10 container mx-auto px-4")
+                        h2(class="mb-12 max-w-lg mx-auto font-heading font-bold text-center text-6xl sm:text-7xl text-white") Join our newsletter? Get Upated with jobs
+                        div(class="mb-9 md:max-w-lg mx-auto")
+                            div(class="p-1 flex flex-col md:flex-row bg-white focus-within:ring-4 focus-within:ring-indigo-500 overflow-hidden rounded-md")
+                                input(name='email', class="block flex-1 px-5 py-4 md:py-0 text-base text-gray-500 bg-transparent outline-none placeholder-gray-500 rounded-tl-xl rounded-bl-xl", type="email", placeholder="Enter email to get started", required)
+                                button(id="subscribeBtn", class="group relative font-heading font-semibold w-full md:w-auto py-5 px-8 text-xs text-white bg-gray-900 uppercase overflow-hidden rounded-md tracking-px")
+                                    div(class="absolute top-0 left-0 transform -translate-y-full group-hover:-translate-y-0 h-full w-full transition ease-in-out duration-500 bg-gradient-cyan")
+                                    p(class="relative z-10") Connect now
+                        p(class="text-gray-500 text-sm text-center")
+                            span Or, learn more
+                            |             
+                            a(class="text-white hover:text-gray-200", href="#") about 99hired
+                    img(class="absolute bottom-0 left-1/2 transform -translate-x-1/2", src="/gradia-assets/elements/cta/radial3.png", alt="")
 
 
         // FOOTER

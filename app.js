@@ -8,7 +8,9 @@ const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/errorController')
 const app = express();
 const paypal = require("@paypal/checkout-server-sdk")
-const catchAsync = require('./utils/catchAsync')
+const catchAsync = require('./utils/catchAsync');
+const Transaction = require('./models/transactionModel')
+const Newsletter = require('./models/newsletterModel')
 
 
 // MIDDLEWARES
@@ -26,18 +28,15 @@ app.use('/api/v1/users', userRouter)
 app.use('/', viewsRouter)
 
 
+app.post('/newsletter', catchAsync(async(req, res, next)=> {
+  const email = req.body;
+  await Newsletter.create(req.body)
+  
+  res.status(201).json({
+    status: 'success'
+  })
 
-
-
-
-
-
-
-
-
-
-
-
+}))
 
 
 const { CLIENT_ID, APP_SECRET } = process.env;
@@ -49,16 +48,18 @@ const baseURL = {
 
 
 // create a new order
-app.post("/create-paypal-order", catchAsync(async (req, res) => {
+app.post("/create-paypal-order", catchAsync(async (req, res, next) => {
   const order = await createOrder();
   res.json(order);
 }));
 
 // capture payment & store order information or fullfill order
-app.post("/capture-paypal-order", catchAsync(async (req, res) => {
+app.post("/capture-paypal-order", catchAsync(async (req, res, next) => {
   const { orderID } = req.body;
   const captureData = await capturePayment(orderID);
+  
   // TODO: store payment information such as the transaction ID
+  await Transaction.create({transactionId: captureData.id})
   res.json(captureData);
 }));
 
@@ -131,117 +132,12 @@ async function generateAccessToken() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const Environment = paypal.core.SandboxEnvironment
-
-// const paypalClient = new paypal.core.PayPalHttpClient(
-//   new Environment(
-//     process.env.PAYPAL_CLIENT_ID,
-//     process.env.PAYPAL_CLIENT_SECRET
-//   )
-// )
-
-// const storeItems = new Map([
-//     [1, { price: 100, name: "Learn React Today" }],
-//     [2, { price: 200, name: "Learn CSS Today" }],
-//   ])
-  
-
-  
-//   app.post("/create-order", async (req, res) => {
-//     const request = new paypal.orders.OrdersCreateRequest()
-//     const total = req.body.items.reduce((sum, item) => {
-//       return sum + storeItems.get(item.id).price * item.quantity
-//     }, 0)
-//     request.prefer("return=representation")
-//     request.requestBody({
-//       intent: "CAPTURE",
-//       purchase_units: [
-//         {
-//           amount: {
-//             currency_code: "USD",
-//             value: total,
-//             breakdown: {
-//               item_total: {
-//                 currency_code: "USD",
-//                 value: total,
-//               },
-//             },
-//           },
-//           items: req.body.items.map(item => {
-//             const storeItem = storeItems.get(item.id)
-//             return {
-//               name: storeItem.name,
-//               unit_amount: {
-//                 currency_code: "USD",
-//                 value: storeItem.price,
-//               },
-//               quantity: item.quantity,
-//             }
-//           }),
-//         },
-//       ],
-//     })
-  
-//     try {
-//       const order = await paypalClient.execute(request)
-//       res.json({ id: order.result.id })
-//     } catch (e) {
-//       res.status(500).json({ error: e.message })
-//     }
-//   })
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // NON EXISTING ROUTES
 app.all('*', (req, res, next)=> {
 
     next(new AppError(`Oh no! The page does not exist ${req.originalUrl}`, 404))
 })
 
-// app.use((req, res, next)=> {
-//     next(new AppError(`Oh no! The page does not exist`, 404))
-// });
 
 app.use(globalErrorHandler)
 
