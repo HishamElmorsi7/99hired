@@ -3,7 +3,7 @@ const Job = require('../models/jobModel')
 const AppError = require('../utils/appError')
 
 exports.getJobs = catchAsync(async (req, res, next)=> {
-    const jobs = await Job.find()
+    const jobs = await Job.find().sort({created_at: -1})
     res.status(200).render('jobs', {
         title: 'overview',
         jobs
