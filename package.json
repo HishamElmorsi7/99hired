@@ -1,12 +1,14 @@
 {
   "name": "boardx",
   "version": "1.0.0",
-  "type": "module",
   "description": "my job board project...",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js"
+  },
+  "engines": {
+    "node": "20.x"
   },
   "repository": {
     "type": "git",
