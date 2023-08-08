@@ -1,6 +1,7 @@
 {
   "name": "boardx",
   "version": "1.0.0",
+  "type": "module",
   "description": "my job board project...",
   "main": "index.js",
   "scripts": {
