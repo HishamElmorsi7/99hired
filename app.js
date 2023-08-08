@@ -11,7 +11,6 @@ const paypal = require("@paypal/checkout-server-sdk")
 const catchAsync = require('./utils/catchAsync');
 const Transaction = require('./models/transactionModel')
 const Newsletter = require('./models/newsletterModel')
-// import fetch from 'node-fetch';
 
 // MIDDLEWARES
 app.use(express.json())
