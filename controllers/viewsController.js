@@ -26,19 +26,27 @@ exports.getJob = catchAsync(async (req, res, next)=> {
 })
 
 exports.getPricing = (req, res)=> {
-    res.status(200).render('pricing')
+    res.status(200).render('pricing', {
+        title: 'Pricing'
+    })
     
 }
 
 exports.getJobForm = (req, res)=> {
-    res.status(200).render('jobform')
+    res.status(200).render('jobform', {
+        title: 'Job Form'
+    })
 }
 
 exports.getNOtFound =  (req, res)=> {
-    res.status(404).render('404')
+    res.status(404).render('404', {
+        title: 'Not Found'
+    })
 }
 
 
 exports.getPaypal =  (req, res)=> {
-    res.status(200).render('paypal')
+    res.status(200).render('paypal', {
+        title: 'Payment'
+    })
 }
