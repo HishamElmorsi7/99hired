@@ -20,7 +20,7 @@ exports.getJob = catchAsync(async (req, res, next)=> {
     }
 
     res.status(200).render('job', {
-        title: 'Job',
+        title: job.title,
         job
     })
 })
