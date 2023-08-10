@@ -13,6 +13,8 @@ router
     .get(jobController.getAllJobs)
     .post(jobController.createJob)
 
+router.route('/createFreeJob').post(jobController.createFreeJob)
+
 router
     .route('/:id')
     .get(jobController.getJob)

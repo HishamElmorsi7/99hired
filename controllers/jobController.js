@@ -114,6 +114,35 @@ exports.createJob = catchAsync(
 )
 
 
+exports.createFreeJob = catchAsync(
+    async (req, res, next) => {
+
+
+        const validatedJob = req.body.validatedJobData
+        
+        if(validatedJob) {
+            const slug = await generateSlug(validatedJob)
+            validatedJob.slug = slug
+    
+            const createdJob = await Job.create(validatedJob)
+
+            res.status(201).json({
+                status: 'success',
+                data: {
+                    job: createdJob
+                }
+            })
+
+        } else {
+            res.status(404).json({
+                status: 'error',
+                message: 'Job Not Created'
+            })
+        }
+    }
+)
+
+
 
 exports.updateJob = catchAsync(
     async (req, res, next) => {

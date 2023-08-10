@@ -136,8 +136,35 @@ if(filterJobsForm){
 
 
 if(pricingBtn) {
+
+  const validatedJobData = JSON.parse(localStorage.getItem('validatedJobData'));
+
+  const dataToSend = {
+    validatedJobData
+  }
+
+
   pricingBtn.addEventListener('click', ()=> {
-    window.location.href ='/paypal'
+
+    fetch('/api/v1/jobs/createFreeJob', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      }, 
+      body: JSON.stringify(dataToSend)
+    })
+    .then(response => {
+      if (!response.ok){
+        alert('Failed, try again ;(')
+      } else {
+        alert('Job will be published soon ;')
+      }
+    })
+    .catch(
+      err => alert('something went wrongxxxx')
+    )
+
+
   })
 }
 
