@@ -155,9 +155,10 @@ if(pricingBtn) {
     })
     .then(response => {
       if (!response.ok){
-        alert('Failed, try again ;(')
+        alert('Oops! Something went wrong. Please try again. 😞')
       } else {
-        alert('Job will be published soon ;')
+        alert('Success! Your job will be published soon. 🚀')
+        window.location.href = '/'
       }
     })
     .catch(
