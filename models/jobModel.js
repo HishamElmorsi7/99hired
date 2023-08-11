@@ -84,6 +84,11 @@ const jobSchema = new mongoose.Schema({
         default: Date.now()
     },
 
+    revised: {
+        type: Boolean,
+        default: false
+    },
+
     slug: {
         type: String,
         required: true,
