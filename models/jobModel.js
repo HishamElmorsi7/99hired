@@ -37,8 +37,8 @@ const jobSchema = new mongoose.Schema({
         trim: true,
         required: [true, 'A job must have a tech'],
         enum: {
-            values: ['javascript', 'python', 'ruby', 'java', 'c#', 'go'],
-            message: 'The entered level is invalid'
+            values: ['javascript', 'python', 'ruby', 'java', 'c#', 'go', 'php'],
+            message: 'The entered stack is invalid'
 
         }
     },
