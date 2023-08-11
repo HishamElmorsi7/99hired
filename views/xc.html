@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<div>
+  <p id="textToCopy">This is the text you want to copy.</p>
+  <button onclick="copyText()">Copy</button>
+  <span id="copyStatus" style="display: none; color: green;">Copied!</span>
+</div>
+
+<script>
+function copyText() {
+  var textToCopy = document.getElementById("textToCopy").textContent;
+  var copyStatus = document.getElementById("copyStatus");
+  
+  var tempInput = document.createElement("textarea");
+  tempInput.value = textToCopy;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
+
+  copyStatus.style.display = "inline";
+
+  setTimeout(function() {
+    copyStatus.style.display = "none";
+  }, 2000); // Revert after 2 seconds
+}
+</script>
+
+</body>
+</html>

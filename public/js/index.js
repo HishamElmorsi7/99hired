@@ -247,3 +247,20 @@ if (paypalButtonContainer) {
 }).render('#paypal-button-container');}
 
 
+function copyText() {
+  var textToCopy = document.getElementById("textToCopy").textContent;
+  var copyStatus = document.getElementById("copyStatus");
+
+  var tempInput = document.createElement("textarea");
+  tempInput.value = textToCopy;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
+
+  copyStatus.style.display = "inline";
+
+  setTimeout(function() {
+    copyStatus.style.display = "none";
+  }, 2000); // Revert after 2 seconds
+}
