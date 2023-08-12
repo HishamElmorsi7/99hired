@@ -81,7 +81,9 @@ const jobSchema = new mongoose.Schema({
 
     created_at: {
         type: Date,
-        default: Date.now()
+        default: function(){
+            return new Date()
+        }
     },
 
     revised: {
