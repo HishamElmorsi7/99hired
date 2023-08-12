@@ -82,7 +82,7 @@ const jobSchema = new mongoose.Schema({
     created_at: {
         type: Date,
         default: function(){
-            return new Date()
+            return new Date(Date.now() + 3*60*60*1000)
         }
     },
 
