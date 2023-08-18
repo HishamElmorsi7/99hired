@@ -4,6 +4,7 @@ const quill = document.getElementById('editor')
 const paypalButtonContainer= document.getElementById('paypal-button-container')
 const pricingBtn = document.getElementById('pricingBtn')
 const newsletterForm = document.getElementById('newsletter')
+const applyBtn = document.getElementById('applyBtn')
 
 
 
@@ -247,21 +248,6 @@ if (paypalButtonContainer) {
   }
 }).render('#paypal-button-container');}
 
-
-function copyText() {
-  var textToCopy = document.getElementById("textToCopy").textContent;
-  var copyStatus = document.getElementById("copyStatus");
-
-  var tempInput = document.createElement("textarea");
-  tempInput.value = textToCopy;
-  document.body.appendChild(tempInput);
-  tempInput.select();
-  document.execCommand("copy");
-  document.body.removeChild(tempInput);
-
-  copyStatus.style.display = "inline";
-
-  setTimeout(function() {
-    copyStatus.style.display = "none";
-  }, 2000); // Revert after 2 seconds
-}
+applyBtn.addEventListener('click', e => {
+  
+})
