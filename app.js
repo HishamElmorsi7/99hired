@@ -12,6 +12,7 @@ const catchAsync = require('./utils/catchAsync');
 const Transaction = require('./models/transactionModel')
 const Newsletter = require('./models/newsletterModel')
 const fetch = require('node-fetch')
+const RateLimit = require('express-rate-limit')
 
 // MIDDLEWARES
 app.use(express.json())
@@ -27,6 +28,14 @@ app.use('/api/v1/jobs', jobRouter)
 app.use('/api/v1/users', userRouter)
 app.use('/', viewsRouter)
 
+const limiter = new RateLimit({
+  windowMs : 15*60*1000,
+  max : 100,
+  delayMs : 0,
+})
+
+
+app.use(limiter);
 
 app.post('/newsletter', catchAsync(async(req, res, next)=> {
   const email = req.body;
