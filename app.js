@@ -28,7 +28,7 @@ app.use('/api/v1/jobs', jobRouter)
 app.use('/api/v1/users', userRouter)
 app.use('/', viewsRouter)
 
-const limiter = new RateLimit({
+const limiter = RateLimit({
   windowMs : 15*60*1000,
   max : 100,
   delayMs : 0,
