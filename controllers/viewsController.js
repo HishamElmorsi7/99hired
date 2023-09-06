@@ -5,6 +5,14 @@ const AppError = require('../utils/appError')
 exports.getJobs = catchAsync(async (req, res, next)=> {
     const jobs = await Job.find().sort({created_at: -1})
     res.status(200).render('jobs', {
+        title: 'All Jobs',
+        jobs
+    })
+})
+
+exports.getLastAddedJobs = catchAsync(async (req, res, next)=> {
+    const jobs = await Job.find().sort({created_at: -1}).limit(40);
+    res.status(200).render('overview', {
         title: 'overview',
         jobs
     })

@@ -5,7 +5,7 @@ const paypalButtonContainer= document.getElementById('paypal-button-container')
 const pricingBtn = document.getElementById('pricingBtn')
 const newsletterForm = document.getElementById('newsletter')
 const applyBtn = document.getElementById('applyBtn')
-
+const jobShownInfo = document.querySelector('.jobShownInfo')
 
 
 // QUILL LOGIC
@@ -248,6 +248,15 @@ if (paypalButtonContainer) {
   }
 }).render('#paypal-button-container');}
 
-applyBtn.addEventListener('click', e => {
-  
-})
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Get the current URL
+  const currentURL = window.location.href;
+
+  // Check if the current URL includes '/jobs'
+  if (currentURL.includes('/jobs')) {
+      // If '/jobs' is found in the URL, hide the element
+      jobShownInfo.style.display = "none";
+  }
+});

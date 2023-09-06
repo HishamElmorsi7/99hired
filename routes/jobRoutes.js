@@ -10,7 +10,7 @@ router
     
 router
     .route('/')
-    .get(jobController.getAllJobs)
+    .get(jobController.getLastAddedJobs)
     .post(jobController.createJob)
 
 router.route('/createFreeJob').post(jobController.createFreeJob)
@@ -23,6 +23,7 @@ router
 
 
 router.post('/validateJob', jobController.validateJob)
+
 
 
 module.exports = router

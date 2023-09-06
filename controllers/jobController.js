@@ -35,6 +35,35 @@ exports.getAllJobs = catchAsync(
     }
 )
 
+
+exports.getLastAddedJobs = catchAsync(
+    async (req, res, next) => {
+        let query = Job.find({}).sort({ createdAt: -1 }).limit(40); // Sort by createdAt in descending order and limit to 40 items.
+        const queryString = req.query
+
+        const apiFeatures = new ApiFeatures(query, queryString)
+        apiFeatures
+            .filter()
+            .sort()
+            .limitFields()
+            .paginate()
+
+        query = apiFeatures.query
+
+        // pre find hook middleware will be executed beore this find query executed 
+        // you will find that in GetAll
+        const jobs = await query
+
+        return res.status(200).render('jobs', {
+            jobs
+        })
+
+
+
+        
+    }
+)
+
 exports.getJob = catchAsync(
     async (req, res, next) => {
         const id = req.params.id
