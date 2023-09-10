@@ -8,11 +8,15 @@ section(class="overflow-hidden pb-10 pt-20", id="jobContent")
                             div
                                 div(class="h-0.5 bg-gradient-cyan")
                                 div(class="flex flex-wrap items-center py-7 -m-2 hover:opacity-70")
+
                                     div(class="w-full md:w-1/2 p-2")
+
+
                                         h3(class="font-heading font-bold text-xl text-gray-900")= job.title.charAt(0).toUpperCase() + job.title.slice(1)
 
                                         p(class="text-lg text-gray-500")= job.company
                                         h3(class="w-1/5 text-transparent bg-clip-text bg-gradient-purple2 bg-gradient-cyan font-bold", contenteditable="false")= job.created_at.toLocaleString('en-us', {month: 'short', day: 'numeric'})
+                                        
                                     div(class="w-full md:w-1/2 p-2")
                                         div(class="flex flex-wrap items-center justify-between")
                                             div(class="w-auto p-2")

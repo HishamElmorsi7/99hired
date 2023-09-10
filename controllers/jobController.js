@@ -28,10 +28,6 @@ exports.getAllJobs = catchAsync(
         return res.status(200).render('jobs', {
             jobs
         })
-
-
-
-        
     }
 )
 
@@ -215,84 +211,5 @@ exports.deleteJob = catchAsync(
         res.status(204).json({
             status: 'success',
         })
-    }
-)
-
-// Alias
-exports.lastFiveJobsAlias = (req, res, next) => {
-    let queryObj = req.query
-    queryObj.sort='-created_at'
-    queryObj.limit='5'
-    next()
-}
-// Alias
-exports.lastFiveJobsAlias = (req, res, next) => {
-    let queryObj = req.query
-    queryObj.sort='-created_at'
-    queryObj.limit='5'
-    next()
-}
-
-exports.getStats = catchAsync(
-    async (req, res, next) => {
-            // Expressions only provides additional features to queries
-            const stats =   await Job.aggregate(
-            [
-                {
-                    $match: {
-                        $expr: {
-                            $eq: [{$year: '$created_at'}, req.params.year * 1]
-                        }
-                    }
-                },
-        
-                {
-                    // allows expressions without 
-                    $group: {
-                        // For each document in the input collection, the $month 
-                        // operator extracts the month from the created_at field, and 
-                        // the resulting value is used as the grouping criterion for the $group
-                        // stage. This means that all documents with the same month value will be
-                        // grouped together in the output of the $group stage.
-
-                        _id: {$month: '$created_at'},
-                        numOfJobs: {$sum: 1},
-                        // '$title' here means each value of document but title means the field
-                        jobs: {$push: '$title'}
-                    },
-
-                },
-                {
-                    $addFields: {
-                        // note that '$field' returns something as we need to assign the value
-                        // of the id field to month but in project we don't need to 
-                        // reference the value
-                        month: '$_id'
-                    }
-                },
-
-                {
-                    // Despite of being able to use expression but we here want only to hide
-                    // the field itself
-                    $project: {_id: 0}
-                },
-
-                {
-                    $sort: { month: -1 }
-                },
-                {
-                    $limit: 2
-                }
-        
-            ]
-        )
-
-        res.status(200).json({
-            status: 'success',
-            data:{
-                stats
-            }
-        })
-
     }
 )

@@ -1,9 +1,7 @@
 const path = require('path')
 const express = require('express');
 const jobRouter = require('./routes/jobRoutes')
-const userRouter = require('./routes/userRoutes')
 const viewsRouter = require('./routes/viewsRoutes')
-// const paypalRouter = require('./routes/paypalRoutes')
 const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/errorController')
 const app = express();
@@ -25,7 +23,6 @@ app.set('views', path.join(__dirname, 'views'))
 
 // ROUTES
 app.use('/api/v1/jobs', jobRouter)
-app.use('/api/v1/users', userRouter)
 app.use('/', viewsRouter)
 
 const limiter = RateLimit({
