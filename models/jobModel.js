@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 // for more validation to plugin within our mongoose 
 const validator = require('validator')
 
-
 // unique won't work when there is already duplicates in the DB
 const jobSchema = new mongoose.Schema({
     // About position
@@ -17,7 +16,7 @@ const jobSchema = new mongoose.Schema({
         required: [true, 'A job must have a workplace type'],
         // enum validator works only for string 
         enum: {
-            values: ['remote', 'office', 'hybrid'],
+            values: ['remote', 'office', 'hybrid', 'other'],
             message: 'The type can only be remote or office or hybrid'
         }
     },
@@ -27,7 +26,7 @@ const jobSchema = new mongoose.Schema({
         trime: true, 
         required: [true, 'A job must have a level'],
         enum: {
-            values: ['intern', 'junior', 'mid-level', 'senior', 'architect'],
+            values: ['intern', 'junior', 'mid-level', 'senior', 'architect', 'other'],
             message: 'The entered level is invalid'
         }
     },

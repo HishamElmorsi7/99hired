@@ -19,6 +19,7 @@ router
 
 
 router.post('/validateJob', jobController.validateJob)
+router.post('/scrapJobs', jobController.scrapJobs)
 
 
 

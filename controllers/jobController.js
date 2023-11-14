@@ -1,3 +1,4 @@
+const { default: axios } = require('axios')
 const Job = require('../models/jobModel')
 const Transaction = require('../models/transactionModel')
 const ApiFeatures = require('../utils/apiFeatures')
@@ -105,6 +106,7 @@ exports.validateJob = catchAsync(
 )
 
 
+
 exports.createJob = catchAsync(
     async (req, res, next) => {
 
@@ -166,6 +168,37 @@ exports.createFreeJob = catchAsync(
         }
     }
 )
+
+exports.scrapJobs = catchAsync(
+    async(req, res, next) => {
+
+        const response = await axios.get('http://127.0.0.1:3000/jobs')
+        
+        const {jobsData} = response.data.data
+
+        for (let job of jobsData) {
+            if(job) {
+                const slug = await generateSlug(job)
+                job.slug = slug
+                const createdJob = await Job.create(job)
+            }
+        }
+
+        res.status(201).json({
+            status: 'success',
+        })
+        
+    }
+)
+
+
+
+
+
+
+
+
+
 
 
 
