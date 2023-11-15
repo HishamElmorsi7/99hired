@@ -20,7 +20,11 @@ section(class="overflow-hidden pb-10 pt-20", id="jobContent")
                                     div(class="w-full md:w-1/2 p-2")
                                         div(class="flex flex-wrap items-center justify-between")
                                             div(class="w-auto p-2")
-                                                p(class="text-lg text-gray-900")= job.workplace_type.charAt(0).toUpperCase() + job.workplace_type.slice(1)+ " " + "📍 "  + job.location
+                                                //- Before removing workplace_type
+                                                //- p(class="text-lg text-gray-900")= job.workplace_type.charAt(0).toUpperCase() + job.workplace_type.slice(1)+ " " + "📍 "  + job.location
+                                                //- After removing
+                                                p(class="text-lg text-gray-900")= "📍 "  + job.location
+
                                             div(class="w-auto p-2")
                                                 a(href=`/jobs/${job.slug}`) 
                                                     button(class="group relative font-heading py-2 px-4 block w-full md:w-auto text-base text-white font-medium bg-gray-900 overflow-hidden rounded-lg")
