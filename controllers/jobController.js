@@ -176,19 +176,14 @@ exports.scrapJobs = catchAsync(
         
         const {jobsData} = response.data.data
 
-        await Promise.all(
+        for(let job of jobsData) {
+            if(job) {
+                const slug = await generateSlug(job)
+                job.slug = slug
+                await Job.create(job)
+            }
+        }
 
-            jobsData
-                .filter(job => !!job)
-                .map(async (job) => {
-
-                    const slug = await generateSlug(job)
-                    job.slug = slug
-                    await Job.create(job)
-
-                })
-
-        )
 
         res.status(201).json({
             status: 'success',
