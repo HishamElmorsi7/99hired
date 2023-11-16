@@ -24,8 +24,8 @@ block content
 
                 - const date = job.created_at.toLocaleString('en-us', {month: 'long', day: 'numeric'})
                 +infoBox('Date Posted', date )
-                +infoBox('Work Type', job.workplace_type)
-                +infoBox('Job Level', job.level)
+                +infoBox('Work Type', job.workplace_type.toUpperCase())
+                +infoBox('Job Level', job.level.toUpperCase())
                 +infoBox('Job Location', job.location)
 
     section(class="relative pt-28 overflow-hidden")
