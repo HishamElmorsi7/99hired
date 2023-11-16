@@ -16,7 +16,7 @@ const jobSchema = new mongoose.Schema({
         required: [true, 'A job must have a workplace type'],
         // enum validator works only for string 
         enum: {
-            values: ['remote', 'office', 'hybrid', 'other'],
+            values: ['remote', 'office', 'hybrid', '-'],
             message: 'The type can only be remote or office or hybrid'
         }
     },
@@ -26,7 +26,7 @@ const jobSchema = new mongoose.Schema({
         trime: true, 
         required: [true, 'A job must have a level'],
         enum: {
-            values: ['intern', 'junior', 'mid-senior', 'senior', 'architect', 'lead', 'other'],
+            values: ['intern', 'junior', 'mid-senior', 'senior', 'architect', 'lead', '-'],
             message: 'The entered level is invalid'
         }
     },
@@ -36,7 +36,7 @@ const jobSchema = new mongoose.Schema({
         trim: true,
         required: [true, 'A job must have a tech'],
         enum: {
-            values: ['javascript', 'python', 'ruby', 'java', 'c#', 'go', 'php', 'other'],
+            values: ['javascript', 'python', 'ruby', 'java', 'c#', 'go', 'php', '-'],
             message: 'The entered stack is invalid'
 
         }
