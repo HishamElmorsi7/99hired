@@ -26,7 +26,7 @@ const jobSchema = new mongoose.Schema({
         trime: true, 
         required: [true, 'A job must have a level'],
         enum: {
-            values: ['intern', 'junior', 'mid-senior', 'senior', 'architect', 'other'],
+            values: ['intern', 'junior', 'mid-senior', 'senior', 'architect', 'lead', 'other'],
             message: 'The entered level is invalid'
         }
     },
