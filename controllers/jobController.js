@@ -176,6 +176,8 @@ exports.scrapJobs = catchAsync(
         const {jobsData} = response.data.data
 
         console.log('\n\n\n\n\n\n')
+        console.log('Those are the jobs')
+
         console.log(jobsData)
         console.log('\n\n\n\n\n\n')
 
