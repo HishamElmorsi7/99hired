@@ -172,7 +172,7 @@ exports.createFreeJob = catchAsync(
 exports.scrapJobs = catchAsync(
     async(req, res, next) => {
 
-        const response = await axios.get('http://127.0.0.1:3000/jobs')
+        const response = await axios.get('https://jobscraper-a58c0130b534.herokuapp.com/')
         
         const {jobsData} = response.data.data
 
