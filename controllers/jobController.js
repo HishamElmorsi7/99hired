@@ -173,7 +173,7 @@ exports.scrapJobs = catchAsync(
     async(req, res, next) => {
 
         const response = await axios.get('https://jobscraper-a58c0130b534.herokuapp.com/')
-        
+        console.log(response.body)
         const {jobsData} = response.data.data
 
         if(jobsData) {
