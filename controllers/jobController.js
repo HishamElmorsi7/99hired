@@ -110,7 +110,7 @@ exports.validateJob = catchAsync(
 exports.createJob = catchAsync(
     async (req, res, next) => {
 
-
+        
         const validatedJob = req.body.validatedJobData
         const transactionId = req.body.transactionId
         const transaction = await Transaction.findOne({transactionId})
